@@ -12,14 +12,14 @@
 
 # Summary
 
-This library reads accelerometer, joystick and button values from a Wii nunchuck controller connected via I2C to you board.
+This library reads accelerometer, joystick and button values from a Wii nunchuck controller connected via I2C to your RaspberryPi or similar boards.
 
 ## Hardware Details
 
 There are a few cheap clones of this controller on the market, and they differ from the original for the initialization sequence required to enable the controller. 
 The few defaults provided should cover most of the available models.
 
-The controller requires 3.3V to work but should be 5V tolerant, and you'll likely need an adapter for the proprietary connector, to make the various pins easier to access. I was using an ICSP adapter for Olimex boards, but as long as you can connect stuff to it (e.g. Dupont female connectors), every adapter will work.
+The controller requires 3.3V to work but should be 5V tolerant, and you'll likely need an adapter for the proprietary connector, to make the various pins easier to access. I was using an ICSP adapter for Olimex boards, but as long as you can connect stuff to it (e.g. Dupont female connectors or connect it directly to the RaspberryPi headers), every adapter will do.
 
 If you want to tinker with the controller via terminal, its I2C address is 0x52 (not decimal, like many guides report).  
 
