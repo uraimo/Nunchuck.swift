@@ -41,35 +41,36 @@ public class Nunchuck{
  
     public var AccelX: Int {
         var rv = UInt16( dec(i2c.readByte(address, command: 0x02)) ) << 2
-        rv |= UInt16( ( dec(i2c.readByte(address, command: 0x05)) & 0xc) >>2 )   
+        rv |= UInt16( ( dec(i2c.readByte(address, command: 0x05)) & 0xc) >> 2 )   
         return Int(rv)
     }
 
     public var AccelY: Int {
         var rv = UInt16( dec(i2c.readByte(address, command: 0x03)) ) << 2
-        rv |= UInt16( ( dec(i2c.readByte(address, command: 0x05)) & 0x30) >>4 )  
+        rv |= UInt16( ( dec(i2c.readByte(address, command: 0x05)) & 0x30) >> 4 ) 
         return Int(rv)
     }
 
     public var AccelZ: Int {
         var rv = UInt16( dec(i2c.readByte(address, command: 0x04)) ) << 2
-        rv |= UInt16( ( dec(i2c.readByte(address, command: 0x05)) & 0xc0) >>6 )     
+        rv |= UInt16( ( dec(i2c.readByte(address, command: 0x05)) & 0xc0) >> 6 )     
         return Int(rv)
     }
 
     public var AnalogX: Int {
-        var rv = dec(i2c.readByte(address, command: 0x0))
+        let rv = dec(i2c.readByte(address, command: 0x0))
         return Int(rv)
     }
 
     public var AnalogY: Int {
-        var rv = dec(i2c.readByte(address, command: 0x1))
+        let rv = dec(i2c.readByte(address, command: 0x1))
         return Int(rv)
     }
  
     /// 3= no button pressed, 1=C button only, 2=Z button only, 0= both buttons
     public var Buttons: Int {
-        var rv = UInt16( dec(i2c.readByte(address, command: 0x40)) & 0x3)     
+        let rv = UInt16( dec(i2c.readByte(address, command: 0x5)) & 0x3)     
+        return Int(rv)
     }
 
     public func getAll() -> (AccelX: Int, AccelY: Int, AccelZ: Int, AnalogX: Int, AnalogY: Int, Buttons: Int) {
@@ -78,11 +79,11 @@ public class Nunchuck{
 
     private func enable(_ type: NunchuckType){
         switch type{
-            case Original:
+            case .Original:
                 i2c.writeByte(address, command: 0x40, value: 0)
-            case Knockoff1:
+            case .Knockoff1:
                 i2c.writeByte(address, command: 0xF0, value: 0x55)
-            case Knockoff2:
+            case .Knockoff2:
                 i2c.writeByte(address, command: 0xFB, value: 0)
         }
     }
