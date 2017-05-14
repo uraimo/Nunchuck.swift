@@ -69,7 +69,7 @@ public class Nunchuck{
  
     /// 3= no button pressed, 1=C button only, 2=Z button only, 0= both buttons
     public var Buttons: Int {
-        let rv = UInt16( dec(i2c.readByte(address, command: 0x5)) & 0x3)     
+        let rv = UInt16( i2c.readByte(address, command: 0x5) & 0x3)     
         return Int(rv)
     }
 
@@ -88,10 +88,9 @@ public class Nunchuck{
         }
     }
 
-    //The bytes read are encoded in the original controller,
-    //the knockoffs don't usually do it
+    // The bytes read are encoded
+    // Not sure if valid for all versions of the controller
     private func dec(_ byte:UInt8) -> UInt8 {
-        guard type == .Original else {return byte}
         return (byte ^ 0x17) + 0x17    
     }
 
