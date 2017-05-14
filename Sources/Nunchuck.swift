@@ -90,8 +90,8 @@ public class Nunchuck{
 
     // The bytes read are encoded
     // Not sure if valid for all versions of the controller
-    private func dec(_ byte:UInt8) -> UInt8 {
-        return (byte ^ 0x17) + 0x17    
+    private func dec(_ byte:UInt8) -> UInt16 {
+        return UInt16(byte ^ 0x17) + 0x17    
     }
 
     public enum NunchuckType{
