@@ -1,7 +1,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "MPU6050",
+    name: "Nunchuck",
     targets: [],
     dependencies: [
         .Package(url: "https://github.com/uraimo/SwiftyGPIO.git",
