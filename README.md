@@ -25,7 +25,7 @@ If you want to tinker with the controller via terminal, its I2C address is 0x52 
 
 ## Usage
   
-To initialize the `Nunchuck` class of this library you'll need an `I2CInterface` instance from SwiftyGPIO, and you'll need to specify the controller type if it's not original (try all the enums until you find one that works). Optionally, an I2C address can also be specified for non-standard controllers.
+To initialize the `Nunchuck` class of this library you'll need an `I2CInterface` instance from [SwiftyGPIO](https://github.com/uraimo/SwiftyGPIO), and you'll need to specify the controller type if it's not original (try all the enums until you find one that works). Optionally, an I2C address can also be specified for non-standard controllers.
 
 ```
 import SwiftyGPIO
