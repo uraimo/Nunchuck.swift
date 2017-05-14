@@ -24,8 +24,50 @@ The controller requires 3.3V to work but should be 5V tolerant, and you'll likel
 If you want to tinker with the controller via terminal, its I2C address is 0x52 (not decimal, like many guides report).  
 
 ## Usage
- 
-//TBD
+  
+To initialize the `Nunchuck` class of this library you'll need an `I2CInterface` instance from SwiftyGPIO, and you'll need to specify the controller type if it's not original (try all the enums until you find one that works). Optionally, an I2C address can also be specified for non-standard controllers.
+
+```
+import SwiftyGPIO
+import Nunchuck
+import Foundation
+
+let i2cs = SwiftyGPIO.hardwareI2Cs(for:.RaspberryPi2)!
+let i2c = i2cs[1]
+
+let mp = Nunchuck(i2c, type: .Knockoff1)
+```
+
+The values read from the controller (accelerometer values, analog joystick position and buttons status) can be read as single properties:
+
+```
+public var AccelX: Int
+public var AccelY: Int
+public var AccelZ: Int
+public var AnalogX: Int
+public var AnalogY: Int
+public var Buttons: Int
+```
+
+Or all in one go, calling the `getAll()` method:
+
+```
+let (ax,ay,az,jx,jy,b) = mp.getAll()
+print("Accelerometer - x:\(ax),y:\(ay),z:\(az)")
+print("Analog Joystick - x:\(jx),y:\(jy)")
+switch b {
+   case 0:
+       print("Buttons: Both pressed")
+   case 1:
+        print("Buttons: C pressed")
+   case 2:
+        print("Buttons: Z pressed")
+   default:
+        print("Buttons: None pressed")
+}
+```
+
+
 
 ## Supported Boards
 
